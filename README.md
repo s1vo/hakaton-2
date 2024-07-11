@@ -11,11 +11,11 @@
 
 1. Клонируйте репозиторий на локальную машину:
     ```sh
-    git clone https://github.com/USERNAME/hackathon-project.git
+    git clone https://github.com/USERNAME/hackathon-2.git
     ```
 2. Перейдите в директорию проекта:
     ```sh
-    cd hackathon-project
+    cd hackathon-2
     ```
 3. Установите зависимости:
     ```sh

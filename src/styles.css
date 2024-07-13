@@ -87,3 +87,12 @@ body {
 .closeButton:hover {
     color: #e74c3c;
 }
+.canvas {
+    display: block;
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    right: 2rem;
+    bottom: 2rem;
+    z-index: -1;
+}

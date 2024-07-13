@@ -1,5 +1,5 @@
 import {Module} from '../core/module'
-import {random} from '../utils'
+import {random, randomColor} from '../utils'
 
 export class ShapeModule extends Module {
     constructor() {
@@ -19,23 +19,17 @@ export class ShapeModule extends Module {
         if (isCanvas) isCanvas.remove();
 
         const canvas = document.createElement('canvas');
-        canvas.id = 'smile';
+        canvas.id = 'canvas';
+        canvas.className = 'canvas';
         canvas.width = width.toString();
         canvas.height = height.toString();
-        canvas.style.display = 'block';
-        canvas.style.position = 'absolute';
-        canvas.style.top = '2rem';
-        canvas.style.left = '2rem';
-        canvas.style.right = '2rem';
-        canvas.style.bottom = '2rem';
-        canvas.style.zIndex = '-1';
         canvas.textContent = 'Извините, ваш браузер нет поддерживает canvas элемент.';
         document.body.appendChild(canvas);
 
 
-        let drawingCanvas = document.getElementById('smile');
+        const drawingCanvas = document.getElementById('canvas');
         if(drawingCanvas && drawingCanvas.getContext) {
-            let ctx  = drawingCanvas.getContext('2d');
+            const ctx = drawingCanvas.getContext('2d');
 
             const arrayFigures = ['rectangle','circle','triangle'];
             const figure = arrayFigures[random(0,arrayFigures.length - 1)];
@@ -64,7 +58,7 @@ export class ShapeModule extends Module {
         const x = random(1, windowInnerWidth - width);
         const y = random(1, windowInnerHeight - height);
 
-        ctx.fillStyle = this.randomColor();
+        ctx.fillStyle = randomColor();
         ctx.fillRect(x, y, width, height);
     }
 
@@ -74,7 +68,7 @@ export class ShapeModule extends Module {
         const x = random(radius, windowInnerWidth - radius);
         const y = random(radius, windowInnerHeight - radius);
 
-        ctx.fillStyle = this.randomColor();
+        ctx.fillStyle = randomColor();
         ctx.beginPath();
         ctx.arc(x,y,radius,0,Math.PI*2,true);
         ctx.closePath();
@@ -92,7 +86,7 @@ export class ShapeModule extends Module {
         const x3 = random(1, windowInnerWidth - 1);
         const y3 = random(1, windowInnerHeight - 1);
 
-        ctx.fillStyle = this.randomColor();
+        ctx.fillStyle = randomColor();
         ctx.beginPath();
         ctx.moveTo(x1, y1);
         ctx.lineTo(x2, y2);
@@ -100,12 +94,4 @@ export class ShapeModule extends Module {
         ctx.fill();
     }
 
-    randomColor() {
-        const arrayValues = ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'];
-        let color = '#';
-        for (let i = 0; i < 6; i++) {
-            color += arrayValues[random(0 , arrayValues.length - 1)];
-        }
-        return color
-    }
 }

@@ -24,8 +24,8 @@ export class ClicksModule extends Module {
             closingModalConfirmButton.textContent = 'Хорошо'
 
             modalOverlay.append(countingModal)
-            deleteModal.append(modalCountingAnswer, closingModalButtons)
-            deleteModalButtons.append(closingModalConfirmButton)
+            countingModal.append(modalCountingAnswer, closingModalButtons)
+            closingModalButtons.append(closingModalConfirmButton)
 
             return modalOverlay
         }

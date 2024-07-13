@@ -6,6 +6,8 @@ import {CustomMessageModule} from "./modules/customMessage.module";
 import {ShapeModule} from "./modules/shape.module";
 import {TimerMessageModule} from "./modules/timerMessage.module";
 import {RandomSoundModule} from "./modules/randomSound.module";
+import { WeatherModule } from './modules/weather.module';
+
 document.addEventListener('DOMContentLoaded', () => {
     const menu = new ContextMenu('#menu');
 
@@ -16,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const shapeModule = new ShapeModule();
     const timerMessageModule = new TimerMessageModule();
     const randomSoundModule = new RandomSoundModule();
+    const weatherModule = new WeatherModule()
 
     menu.add(clicksModule);
     menu.add(backgroundModule);
@@ -23,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     menu.add(shapeModule);
     menu.add(randomSoundModule);
     menu.add(timerMessageModule);
+    menu.add(weatherModule);
 
     // Определение функции-обработчика для правого клика мыши
     const handleContextMenu = (event) => {

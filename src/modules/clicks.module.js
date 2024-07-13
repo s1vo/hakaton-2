@@ -12,20 +12,20 @@ export class ClicksModule extends Module {
         function modalWindow() {
             let modalOverlay = document.createElement('div')
             modalOverlay.className = 'modal-overlay modal-overlay_hidden'
-            let deleteModal = document.createElement('div')
-            deleteModal.className = 'modal-counting'
-            let deleteModalQuestion = document.createElement('h3')
-            deleteModalQuestion.className = 'modal-counting__answer'
-            deleteModalQuestion.textContent = `Вы нажали ${counter} раз`
-            let deleteModalButtons = document.createElement('div')
-            deleteModalButtons.className = 'closing-modal__buttons'
-            let deleteModalConfirmButton = document.createElement('button')
-            deleteModalConfirmButton.className = 'closing-modal__button closing-modal__confirm-button'
-            deleteModalConfirmButton.textContent = 'Хорошо'
+            let countingModal = document.createElement('div')
+            countingModal.className = 'modal-counting'
+            let modalCountingAnswer = document.createElement('h3')
+            modalCountingAnswer.className = 'modal-counting__answer'
+            modalCountingAnswer.textContent = `Вы нажали ${counter} раз`
+            let closingModalButtons = document.createElement('div')
+            closingModalButtons.className = 'closing-modal__buttons'
+            let closingModalConfirmButton = document.createElement('button')
+            closingModalConfirmButton.className = 'closing-modal__button closing-modal__confirm-button'
+            closingModalConfirmButton.textContent = 'Хорошо'
 
-            modalOverlay.append(deleteModal)
-            deleteModal.append(deleteModalQuestion, deleteModalButtons)
-            deleteModalButtons.append(deleteModalConfirmButton)
+            modalOverlay.append(countingModal)
+            deleteModal.append(modalCountingAnswer, closingModalButtons)
+            deleteModalButtons.append(closingModalConfirmButton)
 
             return modalOverlay
         }

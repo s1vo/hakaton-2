@@ -87,3 +87,16 @@ body {
 .closeButton:hover {
     color: #e74c3c;
 }
+.wether_cover {
+    width: 400px;
+    padding: 20px;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 10px 5px 5px #ccc;
+    border: 1px solid #222222;
+    
+}
+.wether_cover-title {
+    font-size: 24px;
+    margin-bottom: 16px;
+}

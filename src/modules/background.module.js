@@ -13,16 +13,11 @@ export class BackgroundModule extends Module {
           color += letters[Math.floor(Math.random() * 16)];
         }
         return color;
-    }; 
+      };
 
     trigger() {
         let backColor = this.getRandomColor();
         const body = document.querySelector('body');
-        body.style.backgroundColor = `${backColor}`;
+        body.style.backgroundColor = `${backColor}`
     }
-
-
-
-    
-
 }

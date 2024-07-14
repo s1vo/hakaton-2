@@ -1,4 +1,5 @@
-import { Module } from '../core/module';
+import { Module } from '@/core/module';
+import {getRandomColor} from '@/utils';
 
 export class BackgroundModule extends Module {
     constructor() {
@@ -6,17 +7,8 @@ export class BackgroundModule extends Module {
         console.log('BackgroundModule created');
     }
 
-    getRandomColor() {
-        const letters = '0123456789ABCDEF';
-        let color = '#';
-        for (let i = 0; i < 6; i++) {
-          color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-      };
-
     trigger() {
-        let backColor = this.getRandomColor();
+        let backColor = getRandomColor();
         const body = document.querySelector('body');
         body.style.backgroundColor = `${backColor}`
     }

@@ -6,6 +6,7 @@ import {CustomMessageModule} from "./modules/customMessage.module";
 import {ShapeModule} from "./modules/shape.module";
 import {TimerMessageModule} from "./modules/timerMessage.module";
 import {RandomSoundModule} from "./modules/randomSound.module";
+
 document.addEventListener('DOMContentLoaded', () => {
     const menu = new ContextMenu('#menu');
 

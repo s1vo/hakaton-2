@@ -41,6 +41,56 @@ body {
     background: #343434;
 }
 
+.modal-counting {
+    position: relative;
+    top: 0;
+    width: 50%;
+    height: fit-content;
+    padding: 15px 25px;
+
+    border: 2px solid #ffffff;
+    border-radius: 5px;
+    background-color: #546792;
+    transition: 0.3s ease-in;
+}
+
+.modal-counting__answer {
+    font-size: 2rem;
+    line-height: 2.5rem;
+    color: #ffffff;
+    margin: 0;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.closing-modal__buttons {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.closing-modal__button {
+    cursor: pointer;
+
+    font-size: 2rem;
+    line-height: 2.5rem;
+
+    background: none;
+    color: #ffffff;
+    padding: 5px 10px;
+
+    transition: 0.3s ease;
+}
+
+.closing-modal__button:hover {
+    box-shadow: 0 0 0 1px #ffffff;
+}
+
+.closing-modal__confirm-button {
+    background-color: #FF0000;
+    border: 1px solid #FF0000;
+}
+
 .container-alert {
     display: flex;
     align-items: center;
@@ -97,3 +147,4 @@ body {
     bottom: 2rem;
     z-index: -1;
 }
+

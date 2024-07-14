@@ -1,6 +1,6 @@
 import { Module } from '../core/module';
 const key = '2d0e848e05679623b697a492507d85ff';
-const url = `https://api.openweathermap.org/data/2.5/weather?lat=55.75&lon=37.61&units=metric&appid=${key}`;
+const url = `ttps://api.openweathermap.org/data/2.5/weather?lat=55.75&lon=37.61&units=metric&appid=${key}`;
 'https://openweathermap.org/img/wn/02d@2x.png'
 export class WeatherModule extends Module {
     constructor() {
@@ -38,7 +38,8 @@ export class WeatherModule extends Module {
     removeModal(event){
         event.target.parentElement.remove()
     }
-    getRender() {
+
+    trigger() {
         if(!this.flagForRender){
             const errorMessage = document.createElement('div')
             errorMessage.textContent = "Не получилось получить информацию, попробуйте позже..."
@@ -87,8 +88,6 @@ export class WeatherModule extends Module {
             e.preventDefault()
             this.removeModal(e)
         })
-    }
-    trigger() {
-        this.getRender()
+
     }
 }

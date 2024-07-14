@@ -39,6 +39,9 @@ export class WeatherModule extends Module {
         event.target.parentElement.remove()
     }
     getRender() {
+        
+    }
+    trigger() {
         if(!this.flagForRender){
             const errorMessage = document.createElement('div')
             errorMessage.textContent = "Не получилось получить информацию, попробуйте позже..."
@@ -87,8 +90,6 @@ export class WeatherModule extends Module {
             e.preventDefault()
             this.removeModal(e)
         })
-    }
-    trigger() {
-        this.getRender()
+
     }
 }

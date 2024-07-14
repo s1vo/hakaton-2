@@ -89,6 +89,7 @@ export class WeatherModule extends Module {
         })
     }
     trigger() {
-        this.getRender()
+        this.
+
     }
 }

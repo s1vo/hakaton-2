@@ -1,4 +1,5 @@
 import { Module } from '../core/module'
+import alarm from '../assets/sounds/alarm.mp3'
 
 export class TimerMessageModule extends Module {
     constructor() {
@@ -6,7 +7,7 @@ export class TimerMessageModule extends Module {
     }
 
 
-    // Создаем HTML-элементы и добавляем их на страницу 
+    // Создаем HTML-элементы и добавляем их на страницу
     countdownTimer(number) {
         const timerWrapper = document.createElement('div')
         timerWrapper.className = 'timer-wrapper'
@@ -28,7 +29,7 @@ export class TimerMessageModule extends Module {
     }
 
 
-    //Конвертируем число отправленное пользователем в часы, минуты, секунды 
+    //Конвертируем число отправленное пользователем в часы, минуты, секунды
     formatTimer(number) {
         const seconds = number % 60;
         const minutes = Math.floor((number % 3600) / 60);
@@ -37,10 +38,14 @@ export class TimerMessageModule extends Module {
     }
 
 
+    // Запускает аудио по окончанию таймера
+    soundOfTimerEnd() {
+        const audio = new Audio(alarm)
+        audio.play()
+    }
 
 
-
-    // Запускает таймер обратного отсчета 
+    // Запускает таймер обратного отсчета
     timerCount(number) {
         const timer = setInterval(() => {
             const idTimer = document.getElementById('timer')
@@ -50,6 +55,7 @@ export class TimerMessageModule extends Module {
             } else {
                 clearInterval(timer)
                 idTimer.textContent = 'Таймер завершил отсчет'
+                this.soundOfTimerEnd()
                 setTimeout(() => {
                     const timeId = document.getElementById('delTimer')
                     timeId.remove()
@@ -67,7 +73,7 @@ export class TimerMessageModule extends Module {
         console.log(number)
         // Проверяем чтобы пользователь ввел корректное число, а не другие символы
         // Если все введено правильно то код выполняется
-        // Если нет, то выводим модальное окно с сообщением об ошибке  
+        // Если нет, то выводим модальное окно с сообщением об ошибке
         if (number > 0 && typeof number === 'number') {
             this.countdownTimer(number)
             this.timerCount(number)

@@ -4,55 +4,58 @@ export class ClicksModule extends Module {
     constructor() {
         super('clicks', 'Аналитика кликов');
         console.log('clicksModule created');
+        this.counter = 0
+        this.clickHandler = this.handleClick.bind(this)
+        this.clouseWindow = this.handlerClouseWindow.bind(this)
     }
 
     trigger() {
         console.log('ClicksModule triggered');
         // Логика для анализа кликов
-        function modalWindow() {
-            let modalOverlay = document.createElement('div')
-            modalOverlay.className = 'modal-overlay modal-overlay_hidden'
-            let countingModal = document.createElement('div')
-            countingModal.className = 'modal-counting'
-            let modalCountingAnswer = document.createElement('h3')
-            modalCountingAnswer.className = 'modal-counting__answer'
-            modalCountingAnswer.textContent = `Вы нажали ${counter} раз`
-            let closingModalButtons = document.createElement('div')
-            closingModalButtons.className = 'closing-modal__buttons'
-            let closingModalConfirmButton = document.createElement('button')
-            closingModalConfirmButton.className = 'closing-modal__button closing-modal__confirm-button'
-            closingModalConfirmButton.textContent = 'Хорошо'
+        this.startClicker()
+    }
+    modalWindow() {
+        let modalOverlay = document.createElement('div')
+        modalOverlay.className = 'modal-overlay modal-overlay_hidden'
+        let countingModal = document.createElement('div')
+        countingModal.className = 'modal-counting'
+        let modalCountingAnswer = document.createElement('h3')
+        modalCountingAnswer.className = 'modal-counting__answer'
+        modalCountingAnswer.textContent = `Вы нажали ${this.counter} раз`
+        let closingModalButtons = document.createElement('div')
+        closingModalButtons.className = 'closing-modal__buttons'
+        let closingModalConfirmButton = document.createElement('button')
+        closingModalConfirmButton.className = 'closing-modal__button closing-modal__confirm-button'
+        closingModalConfirmButton.textContent = 'Хорошо'
 
-            modalOverlay.append(countingModal)
-            countingModal.append(modalCountingAnswer, closingModalButtons)
-            closingModalButtons.append(closingModalConfirmButton)
-
-            return modalOverlay
+        modalOverlay.append(countingModal)
+        countingModal.append(modalCountingAnswer, closingModalButtons)
+        closingModalButtons.append(closingModalConfirmButton)
+        console.log(modalOverlay)
+        return modalOverlay
+    }
+    handleClick(event) {
+        if (event) {
+            this.counter += 1
         }
+    }
+    handlerClouseWindow(event) {
+        const { target } = event
+        if (target.classList.contains("closing-modal__button")) {
+            const div = target.closest('.modal-overlay')
+            div.remove()
+        }
+    }
 
-        let counter = 0
-        window.addEventListener('click', event => {
-            // console.log(event)
-            if (event) {
-                counter += 1
-            }
-            console.log(counter)
-        })
+    startClicker() {
+        window.addEventListener('click', this.clickHandler)
         setTimeout(() => {
-            const func = modalWindow()
-            const body = document.querySelector("body")
-            body.append(func)
+            const func = this.modalWindow()
+            document.body.append(func)
             func.classList.remove('modal-overlay_hidden')
-
-            func.addEventListener('click', event => {
-                const { target } = event
-                const modalButton = target
-                if (modalButton.innerText === 'Хорошо') {
-                    func.classList.add('modal-overlay_hidden')
-                    func.remove()
-                }
-            })
+            func.addEventListener('click', this.clouseWindow)
         }, 5000)
     }
 }
+
 

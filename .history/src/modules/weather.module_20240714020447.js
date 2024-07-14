@@ -1,11 +1,12 @@
 import { Module } from '../core/module';
 const key = '2d0e848e05679623b697a492507d85ff';
 const url = `https://api.openweathermap.org/data/2.5/weather?lat=55.75&lon=37.61&units=metric&appid=${key}`;
-'https://openweathermap.org/img/wn/02d@2x.png'
+
 export class WeatherModule extends Module {
     constructor() {
         super('weather', 'Погода в Москве');
-        this.flagForRender = true
+        // console.log('WeatherModule created');
+       
 
         this.dataFromFetch = fetch(url)
             .then(response => {
@@ -15,11 +16,12 @@ export class WeatherModule extends Module {
                 return response.json();
             })
             .then(json => {
-                console.log('json', json);
                 this.dataFromFetch = json
+                console.log('json', json);
+                console.log('this.dataFromFetch FETCH', this.dataFromFetch);
             })
             .catch(error => {
-                this.flagForRender = false
+                this.flagForrender = false
                 console.error('Error fetching weather data:', error)
             });
     }
@@ -27,7 +29,7 @@ export class WeatherModule extends Module {
         const now = new Date();
     
         const year = now.getFullYear();
-        const month = String(now.getMonth() + 1).padStart(2, '0'); 
+        const month = String(now.getMonth() + 1).padStart(2, '0'); // Месяцы начинаются с 0, поэтому добавляем 1
         const day = String(now.getDate()).padStart(2, '0');
     
         const hours = String(now.getHours()).padStart(2, '0');
@@ -38,12 +40,10 @@ export class WeatherModule extends Module {
     }
 
     trigger() {
-        if(!this.flagForRender){
+        if(!this.flagForrender){
             const errorMessage = document.createElement('div')
-            errorMessage.textContent = "Не получилось получить информацию, попробуйте позже..."
-            errorMessage.className = 'wether_cover'
+            errorMessage.textContent = "Не получилось получить информацию, попробуйте позже"
             document.body.append(errorMessage)
-            return
         }
         console.log('this.dataFromFetch', this.dataFromFetch.main.temp);
         const cover = document.createElement('div')
@@ -60,25 +60,13 @@ export class WeatherModule extends Module {
         currentTime.textContent = `${this.getLocalTime()}`
         cover.append(currentTime)
 
-        
-
         const temperature = document.createElement('p')
-        temperature.classList = 'weather_temperature'
         temperature.textContent = `Температура воздуха: ${this.dataFromFetch.main.temp} ℃`
         cover.append(temperature)
 
         const wind = document.createElement('p')
-        wind.className = 'weather_wind'
         wind.textContent = `Скорость ветра: ${this.dataFromFetch.wind.speed} м/с`
         cover.append(wind)
-
-        const humidity = document.createElement('div')
-        humidity.textContent = `Влажность: ${this.dataFromFetch.main.humidity}%`
-        cover.append(humidity)
-
-        const icon = document.createElement('img')
-        icon.setAttribute('src', `https://openweathermap.org/img/wn/${this.dataFromFetch.weather[0].icon}@2x.png`)
-        cover.append(icon)
 
     }
 }

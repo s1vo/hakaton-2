@@ -1,5 +1,5 @@
-import {Module} from '../core/module'
-import {random, randomColor} from '../utils'
+import {Module} from '@/core/module'
+import {random, getRandomColor} from '@/utils'
 
 export class ShapeModule extends Module {
     constructor() {
@@ -14,31 +14,18 @@ export class ShapeModule extends Module {
             const windowInnerWidth = window.innerWidth - 64;
             const windowInnerHeight = window.innerHeight - 64;
 
-            // Получаем случайным образом размеры в виде ширины и высоты для холста
-            const width = random(windowInnerWidth, windowInnerWidth);
-            const height = random(windowInnerHeight, windowInnerHeight);
-
             // Удаляем холст, если таков уже имеется на странице
             const isCanvas = document.querySelector('canvas');
             if (isCanvas) isCanvas.remove();
 
             // Создаем хост
-            const canvas = document.createElement('canvas');
-            canvas.id = 'canvas';
-            canvas.className = 'canvas';
-            canvas.width = width.toString();
-            canvas.height = height.toString();
-            canvas.textContent = 'Извините, ваш браузер нет поддерживает canvas элемент.';
-            document.body.appendChild(canvas);
+            this.createCanvas(windowInnerWidth, windowInnerHeight)
 
-
-            // Находим в DOM элемент canvas
             const drawingCanvas = document.getElementById('canvas');
 
             // Определяем контекст рисования на холсте как 2D
             const ctx = drawingCanvas.getContext('2d');
 
-            // Создаем массив из названия фигур
             const arrayFigures = ['rectangle','circle','triangle'];
 
             // Рандомно выбирается фигура из массива
@@ -64,24 +51,38 @@ export class ShapeModule extends Module {
 
     }
 
+    createCanvas(width, height) {
+        const canvas = document.createElement('canvas');
+        canvas.id = 'canvas';
+        canvas.className = 'canvas';
+        canvas.width = width.toString();
+        canvas.height = height.toString();
+        canvas.textContent = 'Извините, ваш браузер нет поддерживает canvas элемент.';
+        document.body.appendChild(canvas);
+    }
+
     randomRectangle(ctx, windowInnerWidth, windowInnerHeight) {
-        // Прямоугольник / Квадрат
+        // Создание прямоугольника
         const width = random(10, 400);
         const height = random(10, 400);
         const x = random(1, windowInnerWidth - width);
         const y = random(1, windowInnerHeight - height);
 
-        ctx.fillStyle = randomColor();
+        // Получаем рандомный цвет для фигуры
+        ctx.fillStyle = getRandomColor();
+        // Строим прямоугольник
         ctx.fillRect(x, y, width, height);
     }
 
     randomCircle(ctx, windowInnerWidth, windowInnerHeight) {
-        // Круг
+        // Создание круга
         const radius = random(10, 180);
         const x = random(radius, windowInnerWidth - radius);
         const y = random(radius, windowInnerHeight - radius);
 
-        ctx.fillStyle = randomColor();
+        // Получаем рандомный цвет для фигуры
+        ctx.fillStyle = getRandomColor();
+        // Строим круг
         ctx.beginPath();
         ctx.arc(x,y,radius,0,Math.PI*2,true);
         ctx.closePath();
@@ -89,17 +90,21 @@ export class ShapeModule extends Module {
     }
 
     randomTriangle(ctx, windowInnerWidth, windowInnerHeight) {
-        // Треугольник
+        // Создание треугольника
+        // Получаем случайным образом числа для начальной точки
         const x1 = random(1, windowInnerWidth - 1);
         const y1 = random(1, windowInnerHeight - 1);
 
+        // Получаем случайным образом числа для следующих точек
         const x2 = random(1, windowInnerWidth - 1);
         const y2 = random(1, windowInnerHeight - 1);
 
         const x3 = random(1, windowInnerWidth - 1);
         const y3 = random(1, windowInnerHeight - 1);
 
-        ctx.fillStyle = randomColor();
+        // Получаем рандомный цвет для фигуры
+        ctx.fillStyle = getRandomColor();
+        // Строим треугольник
         ctx.beginPath();
         ctx.moveTo(x1, y1);
         ctx.lineTo(x2, y2);

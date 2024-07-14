@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    height: 100vh;
+    width: 100%;
+    padding: 2rem;
+}
+
+.menu {
+    position: fixed;
+    z-index: 1000;
+    width: 150px;
+    background: #1b1a1a;
+    border-radius: 5px;
+    display: none;
+    list-style: none;
+}
+
+.menu.open {
+    display: block;
+}
+
+.menu .menu-item {
+    padding: 8px 10px;
+    font-size: 1rem;
+    color: #eee;
+    cursor: pointer;
+    transition: background-color .2s ease-in;
+    border-radius: inherit;
+}
+
+.menu .menu-item:hover {
+    background: #343434;
+}
+
+.container-alert {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    width: 400px;
+    padding: 20px;
+    border: 1px solid #e9e9e9;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+.container-alert::before {
+    content: '';
+    width: 4px;
+    height: 100%;
+    background-color: #3498db;
+    border-radius: 4px 0 0 4px;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.alert-content {
+    margin-left: 20px;
+    flex-grow: 1;
+}
+.alert-title {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+.alert-message {
+    font-size: 0.9rem;
+    color: #777;
+}
+.closeButton {
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    color: #777;
+    cursor: pointer;
+    align-self: flex-start;
+}
+.closeButton:hover {
+    color: #e74c3c;
+}
+
+.wether_cover {
+    width: 340px;
+    padding: 20px;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 10px 5px 5px #ccc;
+    border: 1px solid #e9e9e9;
+    /* text-align: center; */
+    background-color: #F5FFFA;
+}
+.wether_cover-title {
+    font-size: 24px;
+    margin-bottom: 16px;
+    font-weight: 700;
+    color: #222222;
+}
+.wether_currentTime{
+    margin-bottom: 10px;
+    color: #FA8072;
+}
+.weather_wind {
+    margin-bottom: 5px;
+}
+.weather_temperature {
+    margin-bottom: 5px;
+}

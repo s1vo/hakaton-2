@@ -8,32 +8,43 @@ export class ShapeModule extends Module {
 
     trigger() {
         console.log('ShapeModule triggered');
-        // Логика для создания фигуры
-        const windowInnerWidth = window.innerWidth - 64;
-        const windowInnerHeight = window.innerHeight - 64;
 
-        const width = random(windowInnerWidth, windowInnerWidth);
-        const height = random(windowInnerHeight, windowInnerHeight);
+        try {
+            // Получаем размеры окна страницы браузера
+            const windowInnerWidth = window.innerWidth - 64;
+            const windowInnerHeight = window.innerHeight - 64;
 
-        const isCanvas = document.querySelector('canvas');
-        if (isCanvas) isCanvas.remove();
+            // Получаем случайным образом размеры в виде ширины и высоты для холста
+            const width = random(windowInnerWidth, windowInnerWidth);
+            const height = random(windowInnerHeight, windowInnerHeight);
 
-        const canvas = document.createElement('canvas');
-        canvas.id = 'canvas';
-        canvas.className = 'canvas';
-        canvas.width = width.toString();
-        canvas.height = height.toString();
-        canvas.textContent = 'Извините, ваш браузер нет поддерживает canvas элемент.';
-        document.body.appendChild(canvas);
+            // Удаляем холст, если таков уже имеется на странице
+            const isCanvas = document.querySelector('canvas');
+            if (isCanvas) isCanvas.remove();
+
+            // Создаем хост
+            const canvas = document.createElement('canvas');
+            canvas.id = 'canvas';
+            canvas.className = 'canvas';
+            canvas.width = width.toString();
+            canvas.height = height.toString();
+            canvas.textContent = 'Извините, ваш браузер нет поддерживает canvas элемент.';
+            document.body.appendChild(canvas);
 
 
-        const drawingCanvas = document.getElementById('canvas');
-        if(drawingCanvas && drawingCanvas.getContext) {
+            // Находим в DOM элемент canvas
+            const drawingCanvas = document.getElementById('canvas');
+
+            // Определяем контекст рисования на холсте как 2D
             const ctx = drawingCanvas.getContext('2d');
 
+            // Создаем массив из названия фигур
             const arrayFigures = ['rectangle','circle','triangle'];
+
+            // Рандомно выбирается фигура из массива
             const figure = arrayFigures[random(0,arrayFigures.length - 1)];
 
+            // Рисуем на холсте фигуру, полученную случайным образом
             switch(figure) {
                 case 'rectangle':
                     this.randomRectangle(ctx, windowInnerWidth, windowInnerHeight);
@@ -47,8 +58,10 @@ export class ShapeModule extends Module {
                 default:
                     return;
             }
-
+        } catch (error) {
+            console.error('Ошибка: не найдет контекст холста', error);
         }
+
     }
 
     randomRectangle(ctx, windowInnerWidth, windowInnerHeight) {

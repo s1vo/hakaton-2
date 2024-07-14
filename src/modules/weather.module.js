@@ -5,6 +5,7 @@ export class WeatherModule extends Module {
     constructor() {
         super('weather', 'Погода в Москве');
         this.flagForRender = true
+        this.flagOpen = false
 
         this.dataFromFetch = fetch(url)
             .then(response => {
@@ -23,15 +24,15 @@ export class WeatherModule extends Module {
     }
     getLocalTime(){
         const now = new Date();
-    
+
         const year = now.getFullYear();
-        const month = String(now.getMonth() + 1).padStart(2, '0'); 
+        const month = String(now.getMonth() + 1).padStart(2, '0');
         const day = String(now.getDate()).padStart(2, '0');
-    
+
         const hours = String(now.getHours()).padStart(2, '0');
         const minutes = String(now.getMinutes()).padStart(2, '0');
         const seconds = String(now.getSeconds()).padStart(2, '0');
-    
+
         return `Сегодня: ${year}/${month}/${day} - Время:${hours}:${minutes}:${seconds}`;
     }
     removeModal(event){
@@ -79,15 +80,23 @@ export class WeatherModule extends Module {
         cover.append(icon)
 
         const btn = document.createElement('button')
-        btn.textContent = 'Close'
+        btn.textContent = 'Закрыть'
         btn.className = 'btnClose'
         cover.append(btn)
         btn.addEventListener('click', (e) => {
             e.preventDefault()
             this.removeModal(e)
+            this.flagOpen = false
         })
     }
     trigger() {
-        this.getRender()
+        try {
+            if (!this.flagOpen) {
+                this.flagOpen = true
+                this.getRender()
+            }
+        } catch (error) {
+            console.error('Ошибка:', error);
+        }
     }
 }

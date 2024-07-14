@@ -5,12 +5,20 @@ export class ClicksModule extends Module {
         super('clicks', 'Аналитика кликов');
         this.clickHandler = this.handleClick.bind(this)
         this.clouseWindow = this.handlerClouseWindow.bind(this)
+        this.flagStart = false
     }
     // Логика для анализа кликов
     trigger() {
+        try {
+            if (!this.flagStart) {
+                this.flagStart = true
+                this.counter = 0;
+                this.startClicker()
+            }
+        } catch (error) {
+            console.error('Ошибка:',error);
+        }
 
-        this.counter = 0;
-        this.startClicker()
     }
     modalWindow() {
         let modalOverlay = document.createElement('div')
@@ -42,6 +50,7 @@ export class ClicksModule extends Module {
         if (target.classList.contains("closing-modal__button")) {
             const div = target.closest('.modal-overlay')
             div.remove()
+            this.flagStart = false
         }
     }
 
@@ -55,5 +64,3 @@ export class ClicksModule extends Module {
         }, 5000)
     }
 }
-
-

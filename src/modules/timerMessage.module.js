@@ -66,19 +66,26 @@ export class TimerMessageModule extends Module {
 
 
     trigger() {
-        console.log('TimerMessageModule triggered');
-        // Логика для создания фигуры
-        // Запрашиваем у пользователя число
-        let number = +prompt('Введите количество секунд для таймера')
-        console.log(number)
-        // Проверяем чтобы пользователь ввел корректное число, а не другие символы
-        // Если все введено правильно то код выполняется
-        // Если нет, то выводим модальное окно с сообщением об ошибке
-        if (number > 0 && typeof number === 'number') {
-            this.countdownTimer(number)
-            this.timerCount(number)
-        } else {
-            alert('Данные введены не правильно')
+        try {
+            // Проверка на наличие таймера
+            const timer = document.querySelector('.timer-wrapper')
+            if (!timer) {
+                // Запрашиваем у пользователя число
+                let number = +prompt('Введите количество секунд для таймера')
+
+                // Проверяем чтобы пользователь ввел корректное число, а не другие символы
+                // Если все введено правильно то код выполняется
+                // Если нет, то выводим модальное окно с сообщением об ошибке
+                if (number > 0 && typeof number === 'number') {
+                    this.countdownTimer(number)
+                    this.timerCount(number)
+                } else {
+                    alert('Данные введены не правильно')
+                }
+            }
+        } catch (error) {
+            console.error('Ошибка:', error);
         }
+
     }
 }

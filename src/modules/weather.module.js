@@ -1,7 +1,6 @@
-import { Module } from '../core/module';
+import { Module } from '@/core/module';
 const key = '2d0e848e05679623b697a492507d85ff';
 const url = `https://api.openweathermap.org/data/2.5/weather?lat=55.75&lon=37.61&units=metric&appid=${key}`;
-'https://openweathermap.org/img/wn/02d@2x.png'
 export class WeatherModule extends Module {
     constructor() {
         super('weather', 'Погода в Москве');
@@ -22,7 +21,7 @@ export class WeatherModule extends Module {
                 console.error('Error fetching weather data:', error)
             });
     }
-    getLocalTime() {
+    getLocalTime(){
         const now = new Date();
     
         const year = now.getFullYear();
@@ -42,22 +41,22 @@ export class WeatherModule extends Module {
         if(!this.flagForRender){
             const errorMessage = document.createElement('div')
             errorMessage.textContent = "Не получилось получить информацию, попробуйте позже..."
-            errorMessage.className = 'wether_cover'
+            errorMessage.className = 'weather_cover'
             document.body.append(errorMessage)
             return
         }
-        console.log('this.dataFromFetch', this.dataFromFetch.main.temp);
+
         const cover = document.createElement('div')
-        cover.className = 'wether_cover'
+        cover.className = 'weather_cover'
 
         const coverTitle = document.createElement('p')
-        coverTitle.className = 'wether_cover-title'
+        coverTitle.className = 'weather_cover-title'
         coverTitle.textContent = 'Погода в Москве'
         document.body.append(cover)
         cover.append(coverTitle)
 
         const currentTime = document.createElement('div')
-        currentTime.className = 'wether_currentTime'
+        currentTime.className = 'weather_currentTime'
         currentTime.textContent = `${this.getLocalTime()}`
         cover.append(currentTime)
 

@@ -15,6 +15,7 @@ export class WeatherModule extends Module {
                 return response.json();
             })
             .then(json => {
+                console.log('json', json);
                 this.dataFromFetch = json
             })
             .catch(error => {
@@ -38,7 +39,7 @@ export class WeatherModule extends Module {
     removeModal(event){
         event.target.parentElement.remove()
     }
-
+    
     trigger() {
         if(!this.flagForRender){
             const errorMessage = document.createElement('div')

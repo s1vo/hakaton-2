@@ -45,6 +45,9 @@ export class ShapeModule extends Module {
                 default:
                     return;
             }
+
+            setTimeout(() => drawingCanvas.remove(), 3000);
+
         } catch (error) {
             console.error('Ошибка: не найдет контекст холста', error);
         }

@@ -3,15 +3,13 @@ import { Module } from '../core/module'
 export class ClicksModule extends Module {
     constructor() {
         super('clicks', 'Аналитика кликов');
-        console.log('clicksModule created');
-        this.counter = 0
         this.clickHandler = this.handleClick.bind(this)
         this.clouseWindow = this.handlerClouseWindow.bind(this)
     }
-
+    // Логика для анализа кликов
     trigger() {
-        console.log('ClicksModule triggered');
-        // Логика для анализа кликов
+
+        this.counter = 0;
         this.startClicker()
     }
     modalWindow() {
